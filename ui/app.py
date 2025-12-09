@@ -26,5 +26,10 @@ with gr.Blocks() as demo:
         search_output = gr.JSON(label="Search Results")
         search_btn = gr.Button("Search")
         search_btn.click(search_summary, inputs=search_query, outputs=search_output)
+    with gr.Tab("Summary History"):
+        history_output = gr.JSON(label="All Summaries")
+        refresh_btn = gr.Button("Refresh History")
+        refresh_btn.click(fn=lambda: requests.get(f"{BACKEND}/history").json(), inputs=[], outputs=history_output)
+
 
 demo.launch(server_name="0.0.0.0", server_port=3000)
