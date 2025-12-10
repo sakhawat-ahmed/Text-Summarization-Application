@@ -20,3 +20,14 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+venv/
+hf_cache/
+ui/packages/
+
+backend/packages/
+backend/local_models/
+backend/nltk_data/
+backend/__pycache__/
+
+~/

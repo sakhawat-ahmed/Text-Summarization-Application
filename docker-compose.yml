@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: summary-backend
+    ports:
+      - "8000:8000"  # Expose backend API port
+    volumes:
+      - ./backend:/app                      
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: summary-ui
+    ports:
+      - "3000:3000"  # Expose UI port
+    depends_on:
+      - backend
+    volumes:
+      - ./ui:/app                             
+    environment:
+      - PYTHONUNBUFFERED=1

@@ -1,9 +1,11 @@
 import chromadb
 from sentence_transformers import SentenceTransformer
+import os
 
 class VectorStore:
     def __init__(self):
-        self.client = chromadb.Client()
+        os.makedirs("/app/local_models/chroma_db", exist_ok=True)
+        self.client = chromadb.PersistentClient(path="/app/local_models/chroma_db")
         self.collection = self.client.get_or_create_collection("summaries")
         self.embedder = SentenceTransformer("/app/local_models/all-MiniLM-L6-v2")
 
